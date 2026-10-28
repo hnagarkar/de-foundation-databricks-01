@@ -1,0 +1,33 @@
+bundle:
+  name: de-project-performance
+
+include:
+  - resources/*.yml
+
+variables:
+  catalog:
+    description: Catalog used by the pipeline
+    default: de_training_dev
+
+targets:
+
+  dev:
+    mode: development
+    default: true
+
+    workspace:
+      host: https://dbc-1089ba3c-b45a.cloud.databricks.com/browse/folders/3363079742648685?o=7474652673410846
+
+    variables:
+      catalog: `de-foundation-01`
+
+  prod:
+    mode: prod
+
+    workspace:
+      host: https://dbc-1089ba3c-b45a.cloud.databricks.com/browse/folders/3789926637234043?o=7474652673410846
+
+      root_path: /Workspace/Production/.bundle/${bundle.name}/${bundle.target}
+
+    variables:
+      catalog: `de-foundation-01-prod`
